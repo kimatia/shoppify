@@ -1,0 +1,10 @@
+src
+.idea
+example
+.gitignore
+.npmignore
+webpack.config.js
+webpack.config.lib.js
+.babelrc
+.travis.yml
+yarn.lock

@@ -1,0 +1,440 @@
+
+@font-face {
+    font-family: 'fjalla_oneregular';
+    src: url('../fonts/fjallaone-regular-webfont.eot');
+    src: url('../fonts/fjallaone-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/fjallaone-regular-webfont.woff') format('woff'),
+         url('../fonts/fjallaone-regular-webfont.ttf') format('truetype'),
+         url('../fonts/fjallaone-regular-webfont.svg#fjalla_oneregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'source_sans_proregular';
+    src: url('../fonts/sourcesanspro-regular-webfont.eot');
+    src: url('../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/sourcesanspro-regular-webfont.woff') format('woff'),
+         url('../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'),
+         url('../fonts/sourcesanspro-regular-webfont.svg#source_sans_proregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/*---------------------------------------
+  Global Styles
+-----------------------------------------*/
+
+body{background:#ffffff;}
+h1, h2, h3, h4, h5, h6{margin: 0;font-family: 'fjalla_oneregular'; color: #5c5c5c;  text-transform: uppercase; padding-bottom: 15px;}
+h1{ font-size: 30px; }
+h2{ font-size: 20px;}
+h3{ font-size: 18px;}
+h4{ font-size: 16px;}
+h5{ font-size: 14px;}
+h6{ font-size: 12px;}
+p{ font-size: 14px; font-family: 'source_sans_proregular'; color: #a5a5a5; margin-right:0; margin-bottom: 15px; line-height: 24px;}
+p:nth-last-child(1){
+	margin-bottom: 0;
+}
+a{ transition:all 1s; color: #a5a5a5;}
+a:hover{}
+img{}
+ ul{
+ 	padding-left: 0;
+ 	list-style-position: inside;
+ }
+/*---------------------------------------
+  Bootsrap Styles Customized
+-----------------------------------------*/
+
+.btn{
+	background: #e24f43;
+	color: #fff;
+	font-family: 'fjalla_oneregular';
+	text-transform: uppercase;
+	border:none;
+}
+.btn:hover{
+	background: #5c5c5c;
+	color: #fff;
+}
+
+
+/*========================================
+  Custom Classes
+========================================*/
+
+.wrapper{
+	padding: 60px 0;
+	}
+.spacing{
+	padding: 30px 0;
+}	
+.spacing-r{
+	padding-right: 30px;
+}	
+.spacing-l{
+	padding-left: 30px;
+}
+.spacing-t{
+	padding-top: 30px;
+}
+.spacing-b{
+	padding-bottom: 30px;
+}
+.spacing-t-b{
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+.spacing-l-r{
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.spacing-t-l{
+	padding-top: 30px;
+	padding-left: 30px;
+}
+.spacing-t-r{
+	padding-right: 30px;
+	padding-top: 30px;
+}
+.spacing-b-l{
+	padding-bottom: 30px;
+	padding-left: 30px;
+}
+.spacing-b-r{
+	padding-bottom: 30px;
+	padding-right: 30px;
+}
+.item-spacing-t{
+	padding-top: 15px;
+}
+.item-spacing-b{
+	padding-bottom: 15px;
+}
+.item-spacing-t-b{
+	padding: 15px 0;
+}
+.item-spacing-l{
+	padding-left: 15px;
+}
+.item-spacing-r{
+	padding-right: 15px;
+}
+.item-spacing-l-r{
+	padding:0 15px;
+}
+.item-spacing-r-b{
+	padding-right: 15px;
+	padding-bottom: 15px;
+}
+.ruler{
+	height: 1px;
+	background: #dfdfdf;
+}
+.block{ float:left;}
+.radi{
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
+.box{
+	border:1px solid #eee;
+	padding: 30px 40px 30px 30px;
+	overflow: hidden;
+}
+.radi-c1{
+	-webkit-border-radius: 5px 0 0 0;
+	-moz-border-radius: 5px 0 0 0;
+	border-radius: 5px 0 0 0;
+}
+.radi-c2{
+	-webkit-border-radius: 0 5px 0 0;
+	-moz-border-radius: 0 5px 0 0;
+	border-radius: 0 5px 0 0;
+}
+.radi-c3{
+	-webkit-border-radius: 0 0 5px 0;
+	 		-moz-border-radius: 0 0 5px 0;
+	 		border-radius: 0 0 5px 0; 		
+}
+.radi-c4{
+	-webkit-border-radius: 0 0 0 5px;
+	-moz-border-radius: 0 0 0 5px;
+	border-radius: 0 0 0 5px;
+}
+.radi-c1-c2{
+	-webkit-border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+}
+.radi-c2-c3{
+	-webkit-border-radius: 0 5px 5px 0;
+	-moz-border-radius: 0 5px 5px 0;
+	border-radius: 0 5px 5px 0;
+}
+.radi-c3-c4{
+	-webkit-border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+}
+.radi-c4-c1{
+	-webkit-border-radius: 5px 0 0 5px;
+	-moz-border-radius: 5px 0 0 5px;
+	border-radius: 5px 0 0 5px;
+}
+.radi-c1-c3{
+	-webkit-border-radius: 5px 0 5px 0;
+	-moz-border-radius: 5px 0 5px 0;
+	border-radius: 5px 0 5px 0;
+}
+.radi-c2-c4{
+	-webkit-border-radius: 0 5px 0 5px;
+	-moz-border-radius: 0 5px 0 5px;
+	border-radius: 0 5px 0 5px;
+}
+.main-title{
+padding: 40px 0;
+overflow: hidden;
+}
+.main-title h3{
+	color: #a5a5a5;
+	margin-bottom: 0;
+}
+
+.main-title .btn{
+	font-size: 20px;
+	margin-top: 20px;
+}
+.main-title .btn:hover{
+	background: #5c5c5c;
+}
+.ruler-top{
+	border-top: 5px solid #5c5c5c;
+}
+.header-warp{
+	padding: 30px 0;
+
+	
+}
+.header-warp h6{
+	color: #a5a5a5;
+}
+.featured-items{
+	padding: 60px 0;
+	overflow: hidden;
+}
+.featured-items i{
+	display: inline-block;
+	text-align: center;
+	line-height: 130px;
+	height: 130px;
+	width: 130px;
+	border: 4px solid #dfdfdf;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	font-size: 40px;
+	color: #e24f43;
+	float: left;
+	margin-right: 20px;
+	
+}
+.featured-items i:hover{
+	background: #e24f43;
+	color: #fff;
+	transition:all 1s;
+	border: 4px solid #e24f43;
+}
+.featured-items h2{
+	padding-top: 30px;
+	padding-bottom: 20px;
+}
+.featured-items .block{margin-bottom: 30px;}
+.subscribe{
+	background: #5c5c5c;
+	padding: 30px;
+	border-radius: 3px;
+	overflow: hidden;
+}
+.subscribe h1{
+	display: inline-block;
+	float: left;
+	padding-right: 20px;
+	padding-bottom: 0;
+	color: #fff;
+}
+.subscribe .btn{
+	margin-left: 15px;
+	transition:all 1s;
+}
+.subscribe .btn:hover{
+	background: #eee;
+	color: #000;
+}
+.subscribe .form-control {
+border-color: #fff;
+}
+
+.featured-blocks{
+	overflow: hidden;
+	padding: 60px 0;
+}
+.featured-blocks .thumbnail{
+	padding: 0;
+}
+.featured-blocks .thumbnail img{
+	width:100%;
+}
+.featured-blocks .thumbnail .caption{
+	padding: 30px;
+}
+.site-header{
+	border-top: 5px solid #5c5c5c;
+	padding: 0px -15px !important;
+	margin: 0 15px;
+}
+.hide {
+  display: none ;
+}
+
+.site-header h3{
+	display: inline-block;
+	
+	
+
+}
+.site-header button{ text-align: left !important; padding-bottom: 0 !important;}
+.site-header .fw-icon-th-list { float: right; padding-top: 10px;}
+.navbar-toggle {margin:0; padding-top: 4px;}
+.navbar-toggle {width: 100%;  padding: 8px 10px !important; outline: none;}
+
+.site-footer{
+	overflow:hidden;
+	padding: 60px 0;
+	border-top: 1px solid #dfdfdf;
+}
+.site-footer a{
+	margin-right:30px;
+}
+.site-footer a:hover{
+	text-decoration: none;
+	color: #e24f43;
+}
+.site-footer a i{
+	display: inline-block;
+	text-align: center;
+	font-size: 14px;
+	color: #e24f43;
+
+}
+/*------------------------------------------------------
+		Menu Styles
+-------------------------------------------------------*/
+
+.site-name h1{
+	padding: 5px 0;
+}
+.navbar-collapse {
+	padding: 0;
+}
+.navbar-nav > li{
+	margin-right: 10px;
+	font-family: 'fjalla_oneregular';
+	font-weight: normal;
+}
+
+.navbar-nav > li a{
+	font-size: 16px;
+	text-transform: uppercase;
+	color: #a5a5a5;
+	padding: 20px;
+}
+.nav > li > a:hover{
+	background: #000;
+	border-radius: 3px;
+}
+ .navbar-nav > li > a:hover{
+	color: #fff;
+	background: #000l;
+	border-radius: 3px;
+}
+.navbar-nav > .active > a{
+	background: #eee;
+	color: #fff;
+	background: #e24f43;
+	border-radius: 3px;
+	}
+.navbar{
+	margin-bottom: 0;
+}
+.dropdown-menu{
+	background:#000;
+	margin-top: 5px !important;
+}
+.dropdown-menu  li a {
+	background: #000;
+	padding: 8px 10px;
+	font-size: 14px;
+	
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+color: #ffffff;
+text-decoration: none;
+background-color: #e24f43;
+}
+.nav .caret {
+border-top-color: #eee;
+border-bottom-color: #eee;
+}
+
+/*------------------------------------------------------
+		Banner Styles
+-------------------------------------------------------*/
+.banner{
+	
+	background: url(../images/banner.jpg) no-repeat;
+	height: 440px;
+	border-radius: 5px;
+}
+.box1, .box2, .box3, .box4{
+	width: 50%;
+	height: 220px;
+	background: url(../images/dot.png);
+	float: left;
+	position: relative;
+}
+.box2, .box3{
+	background: url(../images/dot2.png);
+}
+.banner-item .box3 h3{
+	border-radius: 0 0 0 5px;
+}
+.banner-item{
+	border-radius: 5px;
+}
+.banner-item h3{
+	text-transform: uppercase;
+	display: inline-block;
+	background: #000 !important;
+	padding: 10px;
+	color: #fff;
+	position: absolute;
+	bottom: 0;
+	
+
+}
+.box1:hover, .box2:hover, .box3:hover, .box4:hover{
+	transition:all 1s;
+	background: url(../images/dot-hover.png);
+}
+.box1:hover h3, .box2:hover h3, .box3:hover h3, .box4:hover h3{
+	background: #e24f43 !important;
+	transition:all 1s;
+	
+}
+
+
+
