@@ -1,0 +1,21 @@
+
+
+div.image {
+    margin: 5px;
+ 
+    position: relative;
+}
+
+div.image img {
+
+    border: 1px solid #ccc;
+}
+
+div.image img:hover {
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.32), 0 0 0 0px
+        rgba(0, 0, 0, 0.16);
+}
+
+
+
+

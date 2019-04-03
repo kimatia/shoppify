@@ -1,0 +1,128 @@
+
+body {
+  font-family: 'Droid Sans', sans-serif;
+  padding: 0;
+  font-size: .8em;
+}
+
+a { text-decoration: none; }
+
+h1 { margin: 0; }
+
+#zoom {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .8);
+  display: none;
+}
+
+#wrapper {
+  margin: 0 auto;
+  width: 960px;
+}
+
+header {
+  height: 90px;
+  line-height: 90px;
+  position: relative;
+  text-align: center;
+  background: #fff;
+}
+
+header::before { top : 0px; }
+
+header::after { bottom: 0px; }
+
+header::before, header::after {
+  content: " ";
+  position: absolute;
+  z-index: -10;
+  left: 5%;
+  width: 90%;
+  height: 15px;
+  border-radius: 125px / 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+}
+
+#content { text-align: center; }
+
+#view {
+  margin: 30px 0;
+  height: 384px;
+}
+
+#view img {
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,.6);
+}
+
+#thumbs {
+  position: relative;
+  margin: 20px 0;
+}
+
+#nav-left-thumbs { left: 70px; }
+
+#nav-right-thumbs { right: 70px; }
+
+#nav-left-thumbs, #nav-right-thumbs {
+  position: absolute;
+  top: 30px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,.6);
+  font-size: 1em;
+  font-weight: bold;
+  color: #999;
+  text-shadow: 0 0 10px rgba(0,0,0,.5);
+  cursor: pointer;
+  transition-duration: .5s;
+}
+
+#nav-left-thumbs:hover, #nav-right-thumbs:hover { background: lightgrey; }
+
+#pics-thumbs {
+  position: relative;
+  padding: 5px 0;
+  margin: 0 122px;
+  white-space: nowrap;
+  overflow: hidden;
+  transition-duration: .8s;
+}
+
+#pics-thumbs img {
+  padding: 5px;
+  margin: 0 2px;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0,0,0,.6);
+  cursor: pointer;
+  height: 75px;
+  transition-duration: .5s;
+}
+
+footer {
+  position: relative;
+  text-align: center;
+  padding: 5px 0;
+  background: #fff 5% no-repeat;
+}
+
+footer::before { top : 0px; }
+
+footer::after { bottom: 0px; }
+
+footer::before, footer::after {
+  content: " ";
+  position: absolute;
+  z-index: -10;
+  left: 5%;
+  width: 90%;
+  height: 15px;
+  border-radius: 125px / 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+}
