@@ -28,9 +28,54 @@ $DBcon->close();
     $stmt_delete->bindParam(':uid',$_GET['delete_id']);
     $stmt_delete->execute();
     
-    header("Location: index.php");
+    header("Location: adhome.php");
   }
-
+if(isset($_GET['reserve_id'])){
+   // select image from db to delete
+    $stmt_select = $DB_con->prepare('SELECT * FROM category_products WHERE id =:uid');
+    $stmt_select->execute(array(':uid'=>$_GET['reserve_id']));
+    $stmt_reserve=$stmt_select->fetch(PDO::FETCH_ASSOC);//retursn value as associative array.
+    $pid=$stmt_reserve['id'];
+$category=$stmt_reserve['productCategory'];
+$name=$stmt_reserve['productName'];
+$price=$stmt_reserve['productPrice'];
+$color=$stmt_reserve['productColour'];
+$description=$stmt_reserve['productDescription'];
+$productDiscount=$stmt_reserve['productDiscount'];
+$productFee=$stmt_reserve['productFee'];
+$productImage=$stmt_reserve['productImage'];
+$reserveName=$userRow['username'];
+$reserveNumner=$userRow['phonenumber'];
+$postDate=date("h:i A.",time());
+$stmt = $DB_con->prepare('INSERT INTO tbl_reservation(pid,productCategory,productName,productPrice,productColour,productDescription,productDiscount,productFee,productImage,personelle,pnumber,postDate) VALUES(:pid,:ctgory, :pname, :pprice, :pcolor, :pdesc, :pdisc, :pfee, :pimage, :person,:rnum, :pdate)');
+      $stmt->bindParam(':pid',$pid);
+      $stmt->bindParam(':ctgory',$category);
+      $stmt->bindParam(':pname',$name);
+      $stmt->bindParam(':pprice',$price);
+      $stmt->bindParam(':pcolor',$color);
+      $stmt->bindParam(':pdesc',$description);
+      $stmt->bindParam(':pdisc',$productDiscount);
+      $stmt->bindParam(':pfee',$productFee);
+      $stmt->bindParam(':pimage',$productImage);
+      $stmt->bindParam(':person',$reserveName);
+      $stmt->bindParam(':rnum',$reserveNumner);
+      $stmt->bindParam(':pdate',$postDate);
+      
+      if($stmt->execute())
+      {
+        $reserveNum="1";
+      $stst = $DB_con->prepare('UPDATE category_products SET reservationNumber=:rnum  WHERE id=:uid');
+      $stst->bindParam(':rnum',$reserveNum);
+      $stst->bindParam(':uid',$reserve_id);
+      $stst->execute();
+        $successMSG = "Product succesfully reserved ...";
+        header("refresh:5;adhome.php"); // redirects image view page after 5 seconds.
+      }
+      else
+      {
+        $errMSG = "error while inserting....";
+      }
+}
 if(!empty($_GET["action"])) {
 switch($_GET["action"]) {
   case "add":
@@ -126,15 +171,15 @@ switch($_GET["action"]) {
                   <li class="dropdown ">
               <a href="#" class="dropdown-toggle active" data-toggle="dropdown">About <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Events Hub</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">Rooms</a></li>
-                <li><a href="#">Us</a></li>
+                  <li><a href="services.php">Services</a></li>
+                    <li><a href="revervations.php">View Reservations</a></li>
+                    <li><a href="reserved.php">View Reserved</a></li>
               </ul>
             </li>
+                 
           <li><a class="navbar-brand" href="users.php">Users</a></li>
           <li><a class="navbar-brand" href="addnew.php">Add new </a></li>
-                  <li class="dropdown ">
+                  <li class="dropdown">
               <a href="#" class="dropdown-toggle active" data-toggle="dropdown"><?php echo "Hello Admin ".$userRow['username']; ?><b class="caret"></b></a>
                <ul class="dropdown-menu">
             <li><a href="logout.php?logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp; Logout</a></li>
@@ -152,16 +197,50 @@ switch($_GET["action"]) {
     </div>
     <div class="container">
     <div class="subscribe">
+    <?php
+  if(isset($errMSG)){
+      ?>
+            <div class="alert alert-danger">
+              <span class="glyphicon glyphicon-info-sign"></span> <strong><?php echo $errMSG; ?></strong>
+            </div>
+            <?php
+  }
+  else if(isset($successMSG)){
+    ?>
+        <div class="alert alert-success">
+              <strong><span class="glyphicon glyphicon-info-sign"></span> <?php echo $successMSG; ?></strong>
+        </div>
+        <?php
+  }
+  ?>   
       <div class="row">
-    <div id="shopping-cart">
-<div class="txt-heading">Shopping Cart</div>
-<a id="btnEmpty" href="adhome.php?action=empty">Empty Cart</a>
-<?php
+   <div class="col-md-4">
+   <?php
 if(isset($_SESSION["cart_item"])){
   $pid=rand(2000,6310);
     $total_quantity = 0;
     $total_price = 0;
-?>  
+?>
+   <div class="txt-heading" style="color: white;">Shipment Details</div>
+   <hr>
+
+   <?php
+$firstname=$userRow['firstname'];
+$lastname=$userRow['lastname'];
+$fullname=$firstname." ".$lastname;
+   ?>
+   <pp style="color: white;">Name: <?php echo $fullname; ?></pp><br>
+   <pp style="color: white;">Contact: <?php echo $userRow['phonenumber']; ?></pp><br>
+   <pp style="color: white;">Email: <?php echo $userRow['email']; ?></pp><br>
+   <pp style="color: white;">Mode: Road Transport</pp><br>
+   <pp style="color: white;">Duration: 2 Days.</pp>
+
+   </div>
+   <div class="col-md-8">
+      <div id="shopping-cart">
+<div class="txt-heading" style="color: white;">Shopping Cart</div><hr>
+<a id="btnEmpty" href="adhome.php?action=empty">Empty Cart</a>
+  
 <table class="tbl-cart" cellpadding="10" cellspacing="1">
 <tbody>
 <tr>
@@ -191,13 +270,47 @@ if(isset($_SESSION["cart_item"])){
         $total_price += ($item["price"]*$item["quantity"]);
     }
    if(isset($_GET['price'])){
-    $email=$userRow['email'];
-     $stmt = $DB_con->prepare('INSERT INTO checkout(checkoutCode,productName,productPrice,email) VALUES(:cid, :pname, :pprice,:email)');
+
+$firstname=$userRow['firstname'];
+$lastname=$userRow['lastname'];
+$fullname=$firstname." ".$lastname;
+$phonenumber=$userRow['phonenumber'];
+$email=$userRow['email'];
+$mode="Road Transport";
+$duration="2 Days";
+     $stmt = $DB_con->prepare('INSERT INTO checkout(checkoutCode,productName,productPrice,email,name,phone,mode,duration) VALUES(:cid, :pname, :pprice,:email,:name,:phone,:mode,:duration)');
       $stmt->bindParam(':cid',$pid);
       $stmt->bindParam(':pname',$item["name"]);
       $stmt->bindParam(':pprice',$item["price"]);
       $stmt->bindParam(':email',$email);
-      $stmt->execute();
+      $stmt->bindParam(':name',$fullname);
+      $stmt->bindParam(':phone',$phonenumber);
+      $stmt->bindParam(':mode',$mode);
+      $stmt->bindParam(':duration',$duration);
+      if($stmt->execute()){
+$message1="Your purchase details are:";
+$particularName=$item["name"];
+$particularPrice=$item["price"];
+$code="Code:";
+$name="Name:";
+$price="Price:";
+$mail="Email:";
+$mmode="Mode:";
+$time="Duration:";
+$for="for:";
+$number="Phone";
+$comma=",";
+$messagee=$message1." ".$code." ".$pid."".$comma." ".$name." ".$particularName."".$comma." ".$price." ".$particularPrice."".$comma." ".$mail." ".$email."".$comma." ".$mmode." ".$mode."".$comma." ".$time." ".$duration." ".$for." ".$fullname."".$comma." ".$number." ".$phonenumber;
+require_once __DIR__ . '/vendor/autoload.php';
+$basic  = new \Nexmo\Client\Credentials\Basic('3d981e72','6X2ucIKjdQeynb8g');
+$client = new \Nexmo\Client($basic);
+$uphone=$userRow['phonenumber'];
+$message = $client->message()->send([
+    'to' => $uphone,
+    'from' => 'KIMATIA@CIT',
+    'text' =>  $messagee
+]);
+      }
       unset($_SESSION["cart_item"]);
       $firstname=$userRow['firstname'];
     $lastname=$userRow['lastname'];
@@ -222,12 +335,12 @@ require_once 'mailer/class.phpmailer.php';
         $mail->SMTPDebug  = 0;
         $mail->SMTPAuth   = true;
         $mail->SMTPSecure = "ssl";
-        $mail->Host= "smtp.gmail.com               ";
+        $mail->Host= "smtp.gmail.com";
         $mail->Port       = 465;
         $mail->AddAddress($email);
-        $mail->Username   ="";
-        $mail->Password   ='';
-        $mail->SetFrom('@gmail.com','Boutique Management System');
+        $mail->Username   ="namandajoshuadaniel";
+        $mail->Password   ='namandadaniel199458';
+        $mail->SetFrom('namandajoshuadaniel@gmail.com','Boutique Management System');
         $mail->Subject    = $subject;
         $mail->Body     = $message;
         $mail->AltBody    = $message;
@@ -260,6 +373,8 @@ require_once 'mailer/class.phpmailer.php';
 } 
 ?>
 </div>
+<hr>
+   </div>
 </div>
 
 <br />
@@ -281,23 +396,23 @@ require_once 'mailer/class.phpmailer.php';
         <div class="col-md-3">
           <div class="panel panel-default">
             <div class="panel-body">
-            <div class="col-md-3 product">
       <a href="#" data-toggle="modal" data-target="#productView" data-whatever4=<?php echo $row['id']; ?>>
       <img src="upload/<?php echo $row['productImage']; ?>" class="img-rounded" width="190px" height="200px" />
       </a>
             <div class="row">
               <div class="col-md-6">
-                <h4 style="color: black;"><pp style="color: orange;">Name: </pp><?php echo $row['productName']; ?></h4>
+                <h4 style="color: black;"><pp style="color: orange;">Name: </pp><?php echo $row['productName']; ?></h4><br>
             <h4 style="color: black;"><pp style="color: orange;">KES: </pp><?php echo $row['productPrice']; ?></h4>
               </div>
               <div class="col-md-5">   
       <form method="post" action="adhome.php?action=add&code=<?php echo $row['id']; ?>">
       <div class="cart-action">
       <div class="row">
-        <div class="col-md-6">
+        <div class="row">
           <input type="text" class="product-quantity" name="quantity" value="1" size="2" />
         </div>
-        <div class="col-md-6">  
+        <br>
+        <div class="row">  
         <input type="submit" value="Add to Cart" class=" icon-info-sign" />
         </div>
       </div>
@@ -305,7 +420,6 @@ require_once 'mailer/class.phpmailer.php';
      
       </form>
     </div>
-      </div>
       </div>
       </div>
       </div>

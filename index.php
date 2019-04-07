@@ -36,24 +36,25 @@ $_SESSION['userSession'] = $row['user_id'];
         } 
     }elseif($row['verify']==0){
 $errMSG1="Your account isn't yet verified. We've sent you an SMS with verification code.";
-$message1="Your verification code is ";
 $rowUniqueRandomCode=rand(1000, 9999);
-$messagee=$message1."".$rowUniqueRandomCode;
-$email=$row['email'];
 $stmt = $DB_con->prepare('UPDATE tbl_users SET verifyCode=:vcode WHERE email=:uemail');
 $stmt->bindParam(':vcode',$rowUniqueRandomCode);
 $stmt->bindParam(':uemail',$email);
-$stmt->execute();
+if($stmt->execute()){
+$check_verify = $DBcon->query("SELECT * FROM tbl_users WHERE email='$email'");
+$rowUser=$check_verify->fetch_array();           
+$message1="Your verification code is ";
+$messagee=$message1."".$rowUser['verifyCode'];
 require_once __DIR__ . '/vendor/autoload.php';
-
-$basic  = new \Nexmo\Client\Credentials\Basic('code', 'API key');
+$basic  = new \Nexmo\Client\Credentials\Basic('3d981e72','6X2ucIKjdQeynb8g');
 $client = new \Nexmo\Client($basic);
-$number=$row['phonenumber'];
+$number=$rowUser['phonenumber'];
 $message = $client->message()->send([
     'to' => $number,
-    'from' => 'BOUTIQUE',
+    'from' => 'KIMATIA@CIT',
     'text' =>  $messagee
-]); 
+]);
+}
  header("refresh:2; verify.php");
     }
         
@@ -111,13 +112,12 @@ $message = $client->message()->send([
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                   <li class="active"><a href="#">Home</a></li>
-                  <li class="dropdown ">
+                 <li class="dropdown ">
               <a href="#" class="dropdown-toggle active" data-toggle="dropdown">About <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Events Hub</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">Rooms</a></li>
-                <li><a href="#">Us</a></li>
+                  <li><a href="services.php">Services</a></li>
+                    <li><a href="revervations.php">View Reservations</a></li>
+                    <li><a href="reserved.php">View Reserved</a></li>
               </ul>
             </li>
                  <li><a class="navbar-brand" href="users.php">Users</a></li>

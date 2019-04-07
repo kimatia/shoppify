@@ -19,7 +19,7 @@ if(isset($_POST['btn-signup'])) {
     $uphone = $DBcon->real_escape_string($uphone);
     $email = $DBcon->real_escape_string($email);
     $upass = $DBcon->real_escape_string($upass);
-
+    $rowUniqueRandomCode=rand(1000, 9999);
     
     $hashed_password = password_hash($upass, PASSWORD_DEFAULT); // this function works only in PHP 5.5 or latest version
     // check if fields are empty
@@ -49,23 +49,26 @@ if(isset($_POST['btn-signup'])) {
     $count=$check_email->num_rows;
     
     if ($count==0) {
-        $rowUniqueRandomCode=rand(1000, 9999);
-        $query = "INSERT INTO tbl_users(firstname,lastname,username,phonenumber,email,password,verifyCode) VALUES('$first' , '$last' ,'$uname', '$uphone' ,'$email','$hashed_password','$rowUniqueRandomCode')";
         
+        $query = "INSERT INTO tbl_users(firstname,lastname,username,phonenumber,email,password,verifyCode) VALUES('$first' , '$last' ,'$uname', '$uphone' ,'$email','$hashed_password','$rowUniqueRandomCode')";
+        // 0792814456
 
         if ($DBcon->query($query)) {
-             $successMSG1 = "Registered succesfully.. We sent an SMS with activation code.";
-             require_once __DIR__ . '/vendor/autoload.php';
-
-$basic  = new \Nexmo\Client\Credentials\Basic('code', 'API key');
+$check_verify = $DBcon->query("SELECT verifyCode FROM tbl_users WHERE email='$email'");
+$row=$check_verify->fetch_array();           
+$message1="Your verification code is ";
+$messagee=$message1."".$row['verifyCode'];
+require_once __DIR__ . '/vendor/autoload.php';
+$basic  = new \Nexmo\Client\Credentials\Basic('3d981e72','6X2ucIKjdQeynb8g');
 $client = new \Nexmo\Client($basic);
-$number=$uphone;
+$number=$row['phonenumber'];
 $message = $client->message()->send([
-    'to' => $number,
-    'from' => 'BOUTIQUE',
+    'to' => $uphone,
+    'from' => 'KIMATIA@CIT',
     'text' =>  $messagee
-]);
-            header("refresh:5;home.php");
+]); 
+$successMSG1 = "Registered succesfully.. We sent an SMS with activation code.";
+            header("refresh:5;verify.php");
         }else {
              $errMSG1 = "Error while registering.";
                     
@@ -129,13 +132,12 @@ $message = $client->message()->send([
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                   <li class="active"><a href="#">Home</a></li>
-                  <li class="dropdown ">
+                 <li class="dropdown ">
               <a href="#" class="dropdown-toggle active" data-toggle="dropdown">About <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Events Hub</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">Rooms</a></li>
-                <li><a href="#">Us</a></li>
+                  <li><a href="services.php">Services</a></li>
+                    <li><a href="revervations.php">View Reservations</a></li>
+                    <li><a href="reserved.php">View Reserved</a></li>
               </ul>
             </li>
                  <li><a class="navbar-brand" href="users.php">Users</a></li>
@@ -205,7 +207,7 @@ $message = $client->message()->send([
               <div class="form-group input-group">
                  
                  <span class="input-group-addon">Phone No.</span>
-                 <input class="form-control" required="true" type="text" name="phonenumber" placeholder="Phone No.">
+                 <input class="form-control" required="true" type="text" name="phonenumber" placeholder="2547XXXXXXXXX.">
              </div>
               <div class="form-group input-group">
                  
@@ -256,3 +258,4 @@ $message = $client->message()->send([
        
   </body>
 </html>
+<!-- https://www.youtube.com/watch?v=QoqohmccTSc -->

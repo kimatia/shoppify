@@ -6,7 +6,6 @@ if (isset($_SESSION['userSession'])!="") {
   header("Location: home.php");
   exit;
 }
-
 if (isset($_POST['btn-verify'])) {
     $verifyCode=$_POST['verify'];
     $email=$_POST['email'];
@@ -84,10 +83,9 @@ $stmt->execute();
                   <li class="dropdown ">
               <a href="#" class="dropdown-toggle active" data-toggle="dropdown">About <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Events Hub</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">Rooms</a></li>
-                <li><a href="#">Us</a></li>
+                  <li><a href="services.php">Services</a></li>
+                    <li><a href="revervations.php">View Reservations</a></li>
+                    <li><a href="reserved.php">View Reserved</a></li>
               </ul>
             </li>
                  <li><a class="navbar-brand" href="users.php">Users</a></li>

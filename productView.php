@@ -54,8 +54,8 @@ if(isset($_GET['id']))
 <div class="col-md-6">
 <span class=""><a class="btn btn-primary" href="details.php?details_id=<?php echo $rowSelect['id']; ?>"><i class=" icon-info-sign" style="color: orange;"></i> Details&nbsp;&nbsp;&nbsp;</a></span><br/><br/>
  <span class=""><a class="btn btn-primary" href="editform.php?edit_id=<?php echo $rowSelect['id']; ?>"><i class=" icon-info-sign" style="color: orange;"></i> &nbsp;&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;</a></span><br/><br/>
- <span class=""><a class="btn btn-primary" href="index.php?reserve_id=<?php echo $rowSelect['id']; ?>"><i class=" icon-info-sign" style="color: orange;"></i> Reserve&nbsp;</a></span><br/><br/>
- <span class=""><a class="btn btn-primary" href="index.php?delete_id=<?php echo $rowSelect['id']; ?>"><i class=" icon-info-sign" style="color: orange;"></i> Delete&nbsp;&nbsp;&nbsp;&nbsp;</a></span>
+ <span class=""><a class="btn btn-primary" href="adhome.php?reserve_id=<?php echo $rowSelect['id']; ?>"><i class=" icon-info-sign" style="color: orange;"></i> Reserve&nbsp;</a></span><br/><br/>
+ <span class=""><a class="btn btn-primary" href="adhome.php?delete_id=<?php echo $rowSelect['id']; ?>"><i class=" icon-info-sign" style="color: orange;"></i> Delete&nbsp;&nbsp;&nbsp;&nbsp;</a></span>
 	</div>
 	</div>
 </div>

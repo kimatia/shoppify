@@ -57,7 +57,7 @@ $DBcon->close();
             <!-- navs -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; <?php echo "Hello user ".$userRow['username']; ?></a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; <?php echo "Hello Admin ".$userRow['username']; ?></a></li>
             <li><a href="logout.php?logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp; Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->

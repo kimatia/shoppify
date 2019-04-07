@@ -119,7 +119,7 @@ $DBcon->close();
 			if($stmt->execute())
 			{
 				$successMSG = "Product succesfully inserted ...";
-				header("refresh:5;index.php"); // redirects image view page after 5 seconds.
+				header("refresh:5;adhome.php"); // redirects image view page after 5 seconds.
 			}
 			else
 			{
@@ -175,13 +175,12 @@ $DBcon->close();
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                   <li class="active"><a href="adhome.php">Home</a></li>
-                  <li class="dropdown ">
+                 <li class="dropdown ">
               <a href="#" class="dropdown-toggle active" data-toggle="dropdown">About <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Events Hub</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">Rooms</a></li>
-                <li><a href="#">Us</a></li>
+                  <li><a href="services.php">Services</a></li>
+                    <li><a href="revervations.php">View Reservations</a></li>
+                    <li><a href="reserved.php">View Reserved</a></li>
               </ul>
             </li>
                   <li><a class="navbar-brand" href="users.php">Users</a></li>

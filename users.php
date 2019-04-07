@@ -112,15 +112,7 @@ if(isset($_GET['delete_id']))
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                   <li class="active"><a href="adhome.php">Home</a></li>
-                  <li class="dropdown ">
-              <a href="#" class="dropdown-toggle active" data-toggle="dropdown">About <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Events Hub</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">Rooms</a></li>
-                <li><a href="#">Us</a></li>
-              </ul>
-            </li>
+                   <li><a class="navbar-brand" href="services.php">Services</a></li>
                   <li><a class="navbar-brand" href="users.php">Users</a></li>
           <li><a class="navbar-brand" href="addnew.php">Add new </a></li>
                   <li class="dropdown ">
@@ -151,15 +143,14 @@ if (isset($_POST['btn_save_sms'])) {
     $lastname=$userSelect['lastname'];
     $full_name=$firstname." ".$lastname;
      $text_message=$_POST['message'];
-  $messagee=
+  $messagee=$text_message;
 require_once __DIR__ . '/vendor/autoload.php';
-
-$basic  = new \Nexmo\Client\Credentials\Basic('code', 'API key');
+$basic  = new \Nexmo\Client\Credentials\Basic('3d981e72','6X2ucIKjdQeynb8g');
 $client = new \Nexmo\Client($basic);
-$number=$row['phonenumber'];
+$number=$userSelect['phonenumber'];
 $message = $client->message()->send([
     'to' => $number,
-    'from' => 'BOUTIQUE',
+    'from' => 'KIMATIA@CIT',
     'text' =>  $messagee
 ]); 
 }
@@ -213,12 +204,12 @@ require_once 'mailer/class.phpmailer.php';
         $mail->SMTPDebug  = 0;
         $mail->SMTPAuth   = true;
         $mail->SMTPSecure = "ssl";
-        $mail->Host= "smtp.gmail.com               ";
+        $mail->Host= "smtp.gmail.com";
         $mail->Port       = 465;
         $mail->AddAddress($email);
-        $mail->Username   ="";
-        $mail->Password   ='';
-        $mail->SetFrom('@gmail.com','Boutique Management System');
+        $mail->Username   ="namandajoshuadaniel";
+        $mail->Password   ='namandadaniel199458';
+        $mail->SetFrom('namandajoshuadaniel@gmail.com','Boutique Management System');
         $mail->Subject    = $subject;
         $mail->Body     = $message;
         $mail->AltBody    = $message;
